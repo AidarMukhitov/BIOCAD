@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import SequenceForm from './components/SequenceForm/SequenceForm';
+import AlignmentVisualizer from './components/AlignmentVisualizer/AlignmentVisualizer';
+import { Box, Typography, Container } from '@mui/material';
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
+  const [sequences, setSequences] = useState<{ sequence1: string; sequence2: string } | null>(null);
+
+  const handleSubmit = (data: { sequence1: string; sequence2: string }) => {
+    setSequences(data);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Amino Acid Sequence Alignment Visualizer
+      </Typography>
+      
+      <Typography variant="body1" paragraph>
+        Enter two amino acid sequences of equal length to visualize their alignment.
+        Valid characters: A, R, N, D, C, Q, E, G, H, I, L, K, M, F, P, S, T, W, Y, V, -
+      </Typography>
+      
+      <Box sx={{ mb: 4 }}>
+        <SequenceForm onSubmit={handleSubmit} />
+      </Box>
+      
+      {sequences && (
+        <AlignmentVisualizer 
+          sequence1={sequences.sequence1} 
+          sequence2={sequences.sequence2} 
+        />
+      )}
+    </Container>
   );
-}
+};
 
 export default App;

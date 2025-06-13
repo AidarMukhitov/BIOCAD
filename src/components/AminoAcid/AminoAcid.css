@@ -1,0 +1,12 @@
+.amino-acid {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  line-height: 1.5em;
+  font-family: monospace;
+  font-weight: bold;
+  border-radius: 3px;
+  margin: 1px;
+  user-select: all;
+}
